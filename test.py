@@ -22,7 +22,7 @@ htmlboard=''
 print(open('cgi-bin/data/head.html').read())
 
 print('<body>')
-print('<div class="chessboard">')
+print('<div id="board" class="chessboard"> ')
 
 for row in range(blen):
 	for col in range(blen):
@@ -39,6 +39,7 @@ for row in range(blen):
 		codepart = '<div class="' + pcolor + '">' + codepiece + '</div>'
 		htmlboard = htmlboard + codepart
 
+htmlboard = htmlboard + '</div>'
 print(htmlboard)
 
 print("""
@@ -51,14 +52,14 @@ print("""
       var x = event.clientX, y = event.clientY,
       piece = document.elementFromPoint(x, y);
       if (piece.innerText=="" | (piece.className != 'black' & piece.className != 'white') ) return;
-      console.log(piece.innerText);
+      //console.log(piece.innerText);
+      console.log(document.getElementsByTagName("div").length);
 
-
-var mpiece = document.createElement('div');
-mpiece.className = 'black'
-mpiece.innerText=piece.innerText;
-mpiece.style.background='transparent';
-piece.innerText=""
+      var mpiece = document.createElement('div');
+      mpiece.className = 'black'
+      mpiece.innerText=piece.innerText;
+      mpiece.style.background='transparent';
+      piece.innerText=""
 
 
       var coords = getCoords(piece);
@@ -83,6 +84,8 @@ piece.innerText=""
       document.onmouseup = function() {
         document.onmousemove = null;
         document.onmouseup = null;
+        if(mpiece=="") return;
+        document.body.removeChild(mpiece);
       };
 
     }
