@@ -35,76 +35,17 @@ for row in range(blen):
 
 		if piece == '': codepiece='' 
 		else: codepiece = '&#' + str(Pieces.ix[piece][1]) + ';'
+		p_id = piece + str(row+1) + '_' + str(col+1)
 
-		codepart = '<div class="' + pcolor + '">' + codepiece + '</div>'
+		codepart = '<div id="' + p_id + '" class="' + pcolor + '">' + codepiece + '</div>'
 		htmlboard = htmlboard + codepart
 
 htmlboard = htmlboard + '</div>'
 print(htmlboard)
 
-print("""
+print('<script>')
+print(open('cgi-bin/legalmove.js').read())
+print(open('cgi-bin/chess.js').read())
+print('</script>')
 
-  <script>
-
-    document.onmousedown = function(e) {
-
-
-      var x = event.clientX, y = event.clientY,
-      piece = document.elementFromPoint(x, y);
-      if (piece.innerText=="" | (piece.className != 'black' & piece.className != 'white') ) return;
-      //console.log(piece.innerText);
-      console.log(document.getElementsByTagName("div").length);
-
-      var mpiece = document.createElement('div');
-      mpiece.className = 'black'
-      mpiece.innerText=piece.innerText;
-      mpiece.style.background='transparent';
-      piece.innerText=""
-
-
-      var coords = getCoords(piece);
-      var shiftX = e.pageX - coords.left;
-      var shiftY = e.pageY - coords.top;
-
-      mpiece.style.position = 'absolute';
-      document.body.appendChild(mpiece);
-      moveAt(e);
-
-      mpiece.style.zIndex = 1000; // над другими элементами
-
-      function moveAt(e) {
-        mpiece.style.left = e.pageX - shiftX + 'px';
-        mpiece.style.top = e.pageY - shiftY + 'px';
-      }
-
-      document.onmousemove = function(e) {
-        moveAt(e);
-      };
-
-      document.onmouseup = function() {
-        document.onmousemove = null;
-        document.onmouseup = null;
-        if(mpiece=="") return;
-        document.body.removeChild(mpiece);
-      };
-
-    }
-
-    document.ondragstart = function() {
-      return false;
-    };
-
-
-    function getCoords(elem) { // кроме IE8-
-      var box = elem.getBoundingClientRect();
-
-      return {
-        top: box.top + pageYOffset,
-        left: box.left + pageXOffset
-      };
-
-    }
-  </script>
-  
-	""")
 print('\r\n</body></html>')
