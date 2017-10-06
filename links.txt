@@ -1,0 +1,1 @@
+https://medium.com/code-zen/python-generator-and-html-server-sent-events-3cdf14140e56
