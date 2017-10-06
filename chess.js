@@ -1,10 +1,15 @@
+  var cellsClass = ["black","white"]
+
+  function isCell(e) {
+    if (cellsClass.indexOf(e.className.split(' ')[0]) == -1) {return 0} else {return 1};
+  }
 
   document.onmousedown = function(e) {
 
 
     var x = event.clientX, y = event.clientY,
     piece = document.elementFromPoint(x, y);
-    if (piece.innerText=="" | (piece.className != 'black' & piece.className != 'white') ) return;
+    if (piece.innerText=="" | !isCell(piece) ) return;
     //console.log(document.getElementsByTagName("div").length);
 
     var mpiece = document.createElement('div');
@@ -32,7 +37,10 @@
     function MakeMove(e) {
       var x = event.clientX, y = event.clientY,
       cell = document.elementFromPoint(x, y);
+      pieceClass=piece.className.split(' ')[1];
       cell.innerText=mpiece.innerText;
+      cell.className=cell.className.split(' ')[0] + ' ' + pieceClass;
+      piece.removeClass(pieceClass);
     }
 
     document.onmousemove = function(e) {

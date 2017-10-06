@@ -35,14 +35,21 @@ for row in range(blen):
 
 		if piece == '': codepiece='' 
 		else: codepiece = '&#' + str(Pieces.ix[piece][1]) + ';'
-		p_id = piece + str(row+1) + '_' + str(col+1)
+		c_id = str(row+1) + '_' + str(col+1)
 
-		codepart = '<div id="' + p_id + '" class="' + pcolor + '">' + codepiece + '</div>'
+		if piece == '': 
+			codepart = '<div id="' + c_id + '" class="' + pcolor + '">' + codepiece + '</div>'
+		else:
+			codepart = '<div id="' + c_id + '" class="' + pcolor + ' ' + piece + '">' + codepiece + '</div>'
 		htmlboard = htmlboard + codepart
 
 htmlboard = htmlboard + '</div>'
 print(htmlboard)
 
+print('<div id="demo"></div>')
+
+print('<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>')
+ 
 print('<script>')
 print(open('cgi-bin/legalmove.js').read())
 print(open('cgi-bin/chess.js').read())
