@@ -4,6 +4,7 @@
   if (playercolor == null) {playercolor = "white"};
   if (playercolor != "white") {
     playercolor = "black";
+    Start() 
   };
 
 

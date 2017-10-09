@@ -42,30 +42,23 @@ function getMove(){
 
 
 function handleMove(res){
-	//
-	//console.log(res);
 	if(res=="None") {
 		getMove();
 		return;
 	}
 
 	var obj = JSON.parse(res);
-	alert(obj.type);
 
-	movecolor = invcolor(movecolor);
-
+	MakeMove(document.getElementById(obj.start),document.getElementById(obj.end));
 }
 
 
-function MakeMove(e) {
-  var x = event.clientX, y = event.clientY,
-  cell = document.elementFromPoint(x, y),
-  pieceClass=piece.className.split(' ')[1];
-  sendMove(piece,cell);
+function MakeMove(a,b) {
+  var pieceClass=a.className.split(' ')[1];
 
-  cell.innerText=mpiece.innerText;
-  cell.className=cell.className.split(' ')[0] + ' ' + pieceClass;
-  piece.className = piece.className.split(' ')[0];
+  b.innerText=a.innerText;
+  b.className=b.className.split(' ')[0] + ' ' + pieceClass;
+  a.className = a.className.split(' ')[0];
+  a.innerText='';
   movecolor = invcolor(movecolor);
-  getMove();
 }
