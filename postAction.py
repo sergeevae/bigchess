@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-import sys, codecs, time, json, cgi
+from tinydb import TinyDB, Query
+import sys, codecs, time, json, cgi, os
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 
@@ -10,13 +11,14 @@ print("Content-type: text/html\n")
 
 
 
-
+"""
 obj_json = u'{"answer": [42.2], "abs": 42}'
 obj = json.loads(obj_json)
 print(repr(obj))
+"""
 
-
-
+#print(form)
+#FieldStorage(None, None, [MiniFieldStorage('action', 'newmove'), MiniFieldStorage('color', 'white'), MiniFieldStorage('move', '14_6_11_6'), MiniFieldStorage('piece', 'wp')])
 
 
 if action=="undefined":
@@ -24,9 +26,35 @@ if action=="undefined":
 	sys.exit()
 
 
+if action=="newmove":
+	db = TinyDB('current.json')
+	db.purge()
+	db.insert({'type': 'lastmove', 'color': form.getvalue('color'), 'start': form.getvalue('start'), 'end': form.getvalue('end'), 'piece': form.getvalue('piece') })
 
-print(action)
+	print("OK")
+	sys.exit()
+
+if action=="getmove":
+	res=''; i=1;
+	prevcolor="black"
+	if form.getvalue('color') == "black":
+		prevcolor = "white"
+
+	while True:
+		db = TinyDB('current.json'); q=Query();
+		res = db.search( (q.type == 'lastmove') & (q.color == prevcolor) ) 
+		if (len(res) > 0) | (i>3): break
+		time.sleep(1) 
+		i=i+1
+	
+	if(len(res) == 0):
+		print("None", end="")
+	else:
+		print( str(res[0]).replace("'", '"'), end="" )
+	sys.exit()
+
+
+
 #text1 = form.getfirst("TEXT_1", "не задано")
 
-#time.sleep(10) 
 

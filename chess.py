@@ -46,13 +46,16 @@ for row in range(blen):
 htmlboard = htmlboard + '</div>'
 print(htmlboard)
 
-print('<div id="demo"></div>')
+#print('<div id="demo"></div>')
 
-print('<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>')
- 
+#print('<script src="../js/jquery-2.2.4.min.js" type="text/javascript"></script>')
+#print('<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>')
+print('<script src="../js/postAction.js" type="text/javascript"></script>')
+
+
 print('<script>')
-print(open('cgi-bin/legalmove.js').read())
-print(open('cgi-bin/chess.js').read())
+print(open('js/legalmove.js').read())
+print(open('js/chess.js').read())
 print('</script>')
 
 print('\r\n</body></html>')
