@@ -7,6 +7,7 @@
     Start() 
   };
 
+  var piece; // from piece
 
   function Start() {
     getMove();
@@ -25,7 +26,7 @@
   document.onmousedown = function(e) {
 
 
-    var x = event.clientX, y = event.clientY,
+    var x = event.clientX, y = event.clientY;
     piece = document.elementFromPoint(x, y);
     if (piece.innerText=="" | !isCell(piece) ) return;
     //console.log(document.getElementsByTagName("div").length);
@@ -78,6 +79,7 @@
       if(IfLegalMove(mpiece)) { MakeMove(mpiece) } else { piece.innerText=mpiece.innerText }
 
       document.body.removeChild(mpiece);
+      piece = null;
     };
 
   }
