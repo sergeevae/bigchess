@@ -6,6 +6,7 @@
     playercolor = "black";
     Start() 
   };
+  
 
   var piece; // from piece
 
@@ -63,6 +64,7 @@
       cell.className=cell.className.split(' ')[0] + ' ' + pieceClass;
       piece.className = piece.className.split(' ')[0];
       movecolor = invcolor(movecolor);
+      document.getElementById('move').style.background="red";
       getMove();
     }
 

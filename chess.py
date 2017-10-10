@@ -46,7 +46,7 @@ for row in range(blen):
 htmlboard = htmlboard + '</div>'
 print(htmlboard)
 
-#print('<div id="demo"></div>')
+print('<div id="move">Ход</div>')
 
 #print('<script src="../js/jquery-2.2.4.min.js" type="text/javascript"></script>')
 #print('<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>')

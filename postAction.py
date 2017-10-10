@@ -30,6 +30,9 @@ if action=="newmove":
 	db = TinyDB('current.json')
 	db.purge()
 	db.insert({'type': 'lastmove', 'color': form.getvalue('color'), 'start': form.getvalue('start'), 'end': form.getvalue('end'), 'piece': form.getvalue('piece') })
+	
+	db = TinyDB('all.json')
+	db.insert({'type': 'lastmove', 'color': form.getvalue('color'), 'start': form.getvalue('start'), 'end': form.getvalue('end'), 'piece': form.getvalue('piece') })
 
 	print("OK")
 	sys.exit()
@@ -43,7 +46,7 @@ if action=="getmove":
 	while True:
 		db = TinyDB('current.json'); q=Query();
 		res = db.search( (q.type == 'lastmove') & (q.color == prevcolor) ) 
-		if (len(res) > 0) | (i>3): break
+		if (len(res) > 0) | (i>1): break
 		time.sleep(1) 
 		i=i+1
 	

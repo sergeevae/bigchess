@@ -50,6 +50,8 @@ function handleMove(res){
 	var obj = JSON.parse(res);
 
 	MakeMove(document.getElementById(obj.start),document.getElementById(obj.end));
+	document.getElementById('move').style.background="green";
+
 }
 
 
