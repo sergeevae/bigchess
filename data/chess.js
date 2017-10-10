@@ -64,6 +64,12 @@
       cell.className=cell.className.split(' ')[0] + ' ' + pieceClass;
       piece.className = piece.className.split(' ')[0];
       movecolor = invcolor(movecolor);
+      if(document.getElementsByClassName('moved') != null) {
+        [].forEach.call(document.getElementsByClassName('moved'), function(obj) {
+            //obj.style.background=obj.className.split(' ')[0];
+            obj.setAttribute('style', obj.className.split(' ')[0])
+        });
+      }
       document.getElementById('move').style.background="red";
       getMove();
     }

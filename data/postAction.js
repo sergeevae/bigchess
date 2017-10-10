@@ -59,8 +59,9 @@ function MakeMove(a,b) {
   var pieceClass=a.className.split(' ')[1];
 
   b.innerText=a.innerText;
-  b.className=b.className.split(' ')[0] + ' ' + pieceClass;
-  a.className = a.className.split(' ')[0];
+  b.className=b.className.split(' ')[0] + ' ' + pieceClass + ' moved';
+  a.className = a.className.split(' ')[0] + ' moved';
   a.innerText='';
+  a.style.background = "#a55"; b.style.background = "#a55"; 
   movecolor = invcolor(movecolor);
 }
